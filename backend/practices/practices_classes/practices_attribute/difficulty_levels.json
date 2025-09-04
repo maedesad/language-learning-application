@@ -1,0 +1,52 @@
+{
+  "1": {
+    "difficulty_level": "level 1 - The First Steps – Very Beginner (A0)",
+    "level_description": "Basic everyday context for words and grammar to start communication. Focus on simple objects and greetings.",
+    "difficulty_example_words": ["cat", "book", "hello"]
+  },
+  "2": {
+    "difficulty_level": "level 2 - Daily Life – Beginner (A1)",
+    "level_description": "Vocabulary for common routines and needs. Easy to use in daily conversations.",
+    "example words": ["water", "chair", "run"]
+  },
+  "3": {
+    "difficulty_level": "level 3 - Expanding Basics – High Beginner (A1+)",
+    "level_description": "Words for describing people, actions, and places. Helps build short sentences.",
+    "difficulty_example_words": ["happy", "street", "eat"]
+  },
+  "4": {
+    "difficulty_level": "level 4 - Social Talk – Low Intermediate (A2)",
+    "level_description": "Words for simple discussions and interactions in familiar situations.",
+    "difficulty_example_words": ["friend", "travel", "busy"]
+  },
+  "5": {
+    "difficulty_level": "level 5 - Everyday Contexts – Intermediate (B1-)",
+    "level_description": "More variety in vocabulary, covering feelings, hobbies, and simple opinions.",
+    "difficulty_example_words": ["music", "excited", "park"]
+  },
+  "6": {
+    "difficulty_level": "level 6 - Practical Usage – Mid Intermediate (B1)",
+    "level_description": "Words for school, work, and everyday problem-solving.",
+    "difficulty_example_words": ["explain", "decision", "office"]
+  },
+  "7": {
+    "difficulty_level": "level 7 - Abstract Ideas – Upper Intermediate (B2-)",
+    "level_description": "Vocabulary for describing thoughts, emotions, and abstract concepts.",
+    "difficulty_example_words": ["freedom", "culture", "improve"]
+  },
+  "8": {
+    "difficulty_level": "level 8 - Academic Ground – Intermediate Advanced (B2+)",
+    "level_description": "Words commonly used in study, research, and formal discussions.",
+    "difficulty_example_words": ["analyze", "theory", "evidence"]
+  },
+  "9": {
+    "difficulty_level": "level 9 - Advanced Concepts – Advanced (C1)",
+    "level_description": "Specialized terms and sophisticated vocabulary for deep discussions.",
+    "difficulty_example_words": ["phenomenon", "paradigm", "interpretation"]
+  },
+  "10": {
+    "difficulty_level": "level 10 - Mastery & Nuance – Proficient/Expert (C2)",
+    "level_description": "Rare, literary, and nuanced words for precision and stylistic expression.",
+    "difficulty_example_words": ["serendipity", "ephemeral", "juxtaposition"]
+  }
+}
