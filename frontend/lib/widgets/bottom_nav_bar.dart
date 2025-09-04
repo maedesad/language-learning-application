@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:audioplayers/audioplayers.dart';
 
 // colors
 import '../theme/colors/semantic_colors.dart';
@@ -26,7 +25,6 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
-  final AudioPlayer _audioPlayer = AudioPlayer();
 
   final List<Widget> _pages = const [
     HomePage(),
@@ -49,9 +47,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     ["assets/bottom_nav_bar_icons/profile_unpressed.svg", "assets/bottom_nav_bar_icons/profile_pressed.svg"],
   ];
 
-  void _onItemTapped(int index) async {    
-    await _audioPlayer.play(AssetSource('sound_effect/button_click.wav'));
-
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -110,4 +106,5 @@ class _BottomNavBarState extends State<BottomNavBar> {
     );
   }
 }
+
 
