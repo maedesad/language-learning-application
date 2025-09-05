@@ -59,6 +59,7 @@ class _PracticingPageState extends State<PracticingPage> {
                 "assets/practice_icons/Conversation.svg",
               ],
               selectedIndex: selectedIndices[0],
+              hasAnySelected: selectedIndices.isNotEmpty,
               onSelected: (i) => onButtonSelected(0, i),
             ),
             PracticeRow(
@@ -70,6 +71,7 @@ class _PracticingPageState extends State<PracticingPage> {
                 "assets/practice_icons/Grammar learning.svg",
               ],
               selectedIndex: selectedIndices[1],
+              hasAnySelected: selectedIndices.isNotEmpty,
               onSelected: (i) => onButtonSelected(1, i),
             ),
             PracticeRow(
@@ -82,6 +84,7 @@ class _PracticingPageState extends State<PracticingPage> {
                 "assets/practice_icons/Vocabulary&Grammar review.svg",
               ],
               selectedIndex: selectedIndices[2],
+              hasAnySelected: selectedIndices.isNotEmpty,
               onSelected: (i) => onButtonSelected(2, i),
             ),
           ],
@@ -120,6 +123,7 @@ class PracticeRow extends StatelessWidget {
   final String title;
   final List<String> icons;
   final int? selectedIndex;
+  final bool hasAnySelected;
   final Function(int) onSelected;
 
   const PracticeRow({
@@ -128,6 +132,7 @@ class PracticeRow extends StatelessWidget {
     required this.title,
     required this.icons,
     required this.selectedIndex,
+    required this.hasAnySelected,
     required this.onSelected,
   });
 
@@ -160,7 +165,7 @@ class PracticeRow extends StatelessWidget {
                 return PracticeButton(
                   iconPath: icons[i],
                   isSelected: selectedIndex == i,
-                  isUnselected: selectedIndex != null && selectedIndex != i,
+                  hasAnySelected: hasAnySelected,
                   onTap: () => onSelected(i),
                 );
               }),
@@ -178,21 +183,29 @@ class PracticeRow extends StatelessWidget {
 class PracticeButton extends StatelessWidget {
   final String iconPath;
   final bool isSelected;
-  final bool isUnselected;
+  final bool hasAnySelected;
   final VoidCallback onTap;
 
   const PracticeButton({
     super.key,
     required this.iconPath,
     required this.isSelected,
-    required this.isUnselected,
+    required this.hasAnySelected,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     // Change size and color based on selection state
-    double size = isUnselected ? 132 : 148;
+    double size;
+    if (isSelected) {
+      size = 148;
+    } else if (hasAnySelected) {
+      size = 132;
+    } else {
+      size = 148; // حالت اولیه وقتی هیچ چیزی انتخاب نشده
+    }
+
     Color bgColor = isSelected ? Colors.grey[700]! : Colors.blue[50]!;
 
     return GestureDetector(
