@@ -9,7 +9,7 @@ class Dimensions {
   static double screenWidth = 440.w; 
 
   // Border radius 
-  static double mediumRadius = 8.r;  /// unused
+  static double largeRadius = 16.r;  
 
   // Border thickness
   static double border = 0.5.w;
@@ -21,9 +21,13 @@ class Dimensions {
 
   // Padding
   static double screenHorizontalPadding = 32.w;  
+  static double screenHorizontalLargePadding = 64.w;  
  
   // Gaps
-  static double smallGap = 8.h; /// unused
+  static double verticalSmallGap = 8.h; 
+  static double horizontalSmallGap = 8.w; 
+  static double verticalMediumGap = 16.h; 
+  static double horizontalMediumGap = 16.w;
 
   // app text size
   static double h2_mainTilte = 22.sp;
@@ -31,4 +35,9 @@ class Dimensions {
   static double figmaLetterSpacing = 7.w;
   static double h2_text_hight = h2_figmaLineHeight / h2_mainTilte;
   static double text_letterSpacing = (figmaLetterSpacing / 100) * h2_mainTilte;
+
+  // practice button
+    static double practiceButtonNormal = 148.w;        
+    static double practiceButtonSmall = 132.w;
+ 
 }

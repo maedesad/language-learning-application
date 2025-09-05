@@ -21,8 +21,8 @@ class BaseBackground extends StatelessWidget {
           child: Stack(
             children: [
               Positioned(
-                  left: -50.w,
-                  top: -54.h,
+                  left: -75.w,
+                  top: 54.h,
                 child: Container(
                   width: 1100.w,
                   height: 1100.h,
