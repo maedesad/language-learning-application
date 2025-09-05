@@ -62,7 +62,13 @@ flutter:
   uses-material-design: true
   assets:
     - assets/bottom_nav_bar_icons/
+    - assets/practice_icons/
     - assets/sound_effect/button_click.wav  
+  
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-VariableFont_opsz,wght.ttf    
 
   # To add assets to your application, add an assets section, like this:
   # assets:
