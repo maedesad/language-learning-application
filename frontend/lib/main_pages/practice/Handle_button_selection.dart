@@ -32,7 +32,7 @@ mixin HandleButtonSelection<T extends StatefulWidget> on State<T> {
     if (keyContext != null) {
       Scrollable.ensureVisible(
         keyContext,
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 500),
         alignment: 0.5,
       );
     }

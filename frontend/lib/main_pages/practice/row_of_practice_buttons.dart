@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'practice_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // dimensions
 import '../../theme/dimensions.dart';
 // text style
 import '../../theme/text_style/text_style.dart';
+import 'practice_page_widgets/four_button_row_layout.dart';
+import 'practice_page_widgets/three_button_row_layout.dart';
+import 'practice_page_widgets/two_button_row_layout.dart';
 
 class PracticeRow extends StatelessWidget {
   final int rowIndex;
@@ -27,10 +29,36 @@ class PracticeRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // مقداردهی اولیه به متغیر ویجت دکمه‌ها
+    Widget buttonsWidget = SizedBox();
+
+    if (icons.length == 2) {
+      buttonsWidget = TwoButtonRowLayout(
+        icons: icons,
+        selectedIndex: selectedIndex,
+        hasAnySelected: hasAnySelected,
+        onSelected: onSelected,
+      );
+    } else if (icons.length == 3) {
+      buttonsWidget = ThreeButtonRowLayout(
+        icons: icons,
+        selectedIndex: selectedIndex,
+        hasAnySelected: hasAnySelected,
+        onSelected: onSelected,
+      );
+    } else {
+      buttonsWidget = FourButtonRowLayout(
+        icons: icons,
+        selectedIndex: selectedIndex,
+        hasAnySelected: hasAnySelected,
+        onSelected: onSelected,
+      );
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Row title
+        // عنوان ردیف
         Container(
           height: 77.h,
           padding: EdgeInsets.symmetric(
@@ -43,7 +71,7 @@ class PracticeRow extends StatelessWidget {
           ),
         ),
 
-        // Buttons in the row
+        // دکمه‌های ردیف
         Padding(
           padding: EdgeInsets.only(
             left: Dimensions.screenHorizontalLargePadding,
@@ -51,18 +79,7 @@ class PracticeRow extends StatelessWidget {
             top: 24.h,
             bottom: 58.h,
           ),
-          child: Wrap(
-            spacing: Dimensions.horizontalMediumGap,
-            runSpacing: Dimensions.verticalMediumGap,
-            children: List.generate(icons.length, (i) {
-              return PracticeButton(
-                iconPath: icons[i],
-                isSelected: selectedIndex == i,
-                hasAnySelected: hasAnySelected,
-                onTap: () => onSelected(i),
-              );
-            }),
-          ),
+          child: buttonsWidget,
         ),
       ],
     );
