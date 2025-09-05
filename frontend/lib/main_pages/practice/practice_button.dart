@@ -9,14 +9,14 @@ import '../../theme/dimensions.dart';
 class PracticeButton extends StatelessWidget {
   final String iconPath;
   final bool isSelected;
-  final bool hasAnySelected;
+  final bool shouldShrink;
   final VoidCallback onTap;
 
   const PracticeButton({
     super.key,
     required this.iconPath,
     required this.isSelected,
-    required this.hasAnySelected,
+    required this.shouldShrink,
     required this.onTap,
   });
 
@@ -25,7 +25,7 @@ class PracticeButton extends StatelessWidget {
     double size;
     if (isSelected) {
       size = Dimensions.practiceButtonNormal;
-    } else if (hasAnySelected) {
+    } else if (shouldShrink) {
       size = Dimensions.practiceButtonSmall;
     } else {
       size = Dimensions.practiceButtonNormal;
@@ -36,7 +36,7 @@ class PracticeButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 300),
         width: size,
         height: size,
         decoration: BoxDecoration(

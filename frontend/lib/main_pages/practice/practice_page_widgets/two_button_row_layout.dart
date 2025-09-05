@@ -27,16 +27,16 @@ class TwoButtonRowLayout extends StatelessWidget {
         PracticeButton(
           iconPath: icons[0],
           isSelected: selectedIndex == 0,
-          hasAnySelected: hasAnySelected,
+          shouldShrink: selectedIndex != null && selectedIndex != 0, // فقط هم‌ردیفی‌ها
           onTap: () => onSelected(0),
         ),
         SizedBox(width: Dimensions.horizontalMediumGap), // فاصله 16 بین دکمه‌ها
         PracticeButton(
           iconPath: icons[1],
           isSelected: selectedIndex == 1,
-          hasAnySelected: hasAnySelected,
+          shouldShrink: selectedIndex != null && selectedIndex != 1, // فقط هم‌ردیفی‌ها
           onTap: () => onSelected(1),
-        ),
+        )
       ],
     );
   }

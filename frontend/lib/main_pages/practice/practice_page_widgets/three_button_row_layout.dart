@@ -25,7 +25,7 @@ class ThreeButtonRowLayout extends StatelessWidget {
       return PracticeButton(
         iconPath: icons[i],
         isSelected: selectedIndex == i,
-        hasAnySelected: hasAnySelected,
+        shouldShrink: selectedIndex != null && selectedIndex != i, // فقط هم‌ردیفی‌ها
         onTap: () => onSelected(i),
       );
     });
