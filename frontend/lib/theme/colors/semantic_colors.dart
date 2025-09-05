@@ -4,6 +4,12 @@ import 'raw_palette.dart';
 /// Semantic color system
 /// Use these in the app instead of raw palette values
 class SemanticColors {
+  // background
+  static const Color backgroundBaseBlueColor = RawPalette.skyBlue_50;
+  static const Color BackgroundPurpleGradientColor = RawPalette.deepPurple_100_warm;
+  static const Color BackgroundYellowGradientColor = RawPalette.acidyellow_100_opacity_0;
+
+
   // Surface  
   static const Color surface = RawPalette.skyBlue_5;
   static const Color border = RawPalette.coolGray_200;

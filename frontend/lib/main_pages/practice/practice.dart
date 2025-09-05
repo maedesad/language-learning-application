@@ -5,8 +5,8 @@ class PracticingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text("Practicing Page")),
+    return const Center(
+      child: Text("Practice Page"),
     );
   }
 }

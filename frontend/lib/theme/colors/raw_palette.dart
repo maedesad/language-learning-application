@@ -34,6 +34,7 @@ class RawPalette {
   static const Color acidyellow_50 = Color(0xFFFBFBF4);
   static const Color acidyellow_75 = Color(0xFFFAFBEA);
   static const Color acidyellow_100 = Color(0xFFF6F8DB);
+  static const Color acidyellow_100_opacity_0 = Color(0x00F6F8DB);
   static const Color acidyellow_150 = Color(0xFFEFF3C9);
   static const Color acidyellow_200 = Color(0xFFEEECCA);
   static const Color acidyellow_300 = Color(0xFFE6E4B2);

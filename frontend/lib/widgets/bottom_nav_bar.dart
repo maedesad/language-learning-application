@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../theme/base_background_theme.dart';
 
 // colors
 import '../theme/colors/semantic_colors.dart';
@@ -53,11 +54,19 @@ class _BottomNavBarState extends State<BottomNavBar> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: Container(
+   @override
+    Widget build(BuildContext context) {
+      return BaseBackground(
+        child: Scaffold(
+          backgroundColor: Colors.transparent, // بک‌گراند از BaseBackground بیفته
+          body: _pages[_selectedIndex],
+          bottomNavigationBar: _buildBottomBar(),
+        ),
+      );
+    }
+
+    Widget _buildBottomBar() {
+      return Container(
         height: 70.h + 28.h, // main hight + bottom paading
         width: Dimensions.screenWidth,
         decoration: BoxDecoration(
@@ -102,9 +111,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
             }),
           ),
         ),
-      ),
-    );
+      );      
   }
 }
+
 
 
