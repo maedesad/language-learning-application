@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'practice_page_widgets/four_button_row_layout.dart';
+import 'practice_page_widgets/three_button_row_layout.dart';
+import 'practice_page_widgets/two_button_row_layout.dart';
+import 'practice_button_data.dart';
+
 
 // dimensions
 import '../../theme/dimensions.dart';
 // text style
 import '../../theme/text_style/text_style.dart';
-import 'practice_page_widgets/four_button_row_layout.dart';
-import 'practice_page_widgets/three_button_row_layout.dart';
-import 'practice_page_widgets/two_button_row_layout.dart';
+
+
 
 class PracticeRow extends StatelessWidget {
   final int rowIndex;
   final String title;
-  final List<String> icons;
+  final List<PracticeButtonData> buttonsData;
   final int? selectedIndex;
   final bool hasAnySelected;
   final Function(int) onSelected;
@@ -21,7 +25,7 @@ class PracticeRow extends StatelessWidget {
     super.key,
     required this.rowIndex,
     required this.title,
-    required this.icons,
+    required this.buttonsData,
     required this.selectedIndex,
     required this.hasAnySelected,
     required this.onSelected,
@@ -29,26 +33,25 @@ class PracticeRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // مقداردهی اولیه به متغیر ویجت دکمه‌ها
-    Widget buttonsWidget = SizedBox();
+    Widget buttonsWidget;
 
-    if (icons.length == 2) {
+    if (buttonsData.length == 2) {
       buttonsWidget = TwoButtonRowLayout(
-        icons: icons,
+        buttonsData: buttonsData,
         selectedIndex: selectedIndex,
         hasAnySelected: hasAnySelected,
         onSelected: onSelected,
       );
-    } else if (icons.length == 3) {
+    } else if (buttonsData.length == 3) {
       buttonsWidget = ThreeButtonRowLayout(
-        icons: icons,
+        buttonsData: buttonsData,
         selectedIndex: selectedIndex,
         hasAnySelected: hasAnySelected,
         onSelected: onSelected,
       );
     } else {
       buttonsWidget = FourButtonRowLayout(
-        icons: icons,
+        buttonsData: buttonsData,
         selectedIndex: selectedIndex,
         hasAnySelected: hasAnySelected,
         onSelected: onSelected,
@@ -85,3 +88,4 @@ class PracticeRow extends StatelessWidget {
     );
   }
 }
+

@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import '../practice_button.dart';
+import '../practice_button_data.dart';
+
 // dimensions
 import '../../../theme/dimensions.dart';
 
 
 class TwoButtonRowLayout extends StatelessWidget {
-  final List<String> icons;
+  final List<PracticeButtonData> buttonsData;
   final int? selectedIndex;
   final bool hasAnySelected;
   final Function(int) onSelected;
 
   const TwoButtonRowLayout({
     super.key,
-    required this.icons,
+    required this.buttonsData,
     required this.selectedIndex,
     required this.hasAnySelected,
     required this.onSelected,
@@ -22,21 +24,26 @@ class TwoButtonRowLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         PracticeButton(
-          iconPath: icons[0],
+          iconPath: buttonsData[0].iconPath,
+          title: buttonsData[0].title,
+          practiceEntryPage: buttonsData[0].page,
           isSelected: selectedIndex == 0,
-          shouldShrink: selectedIndex != null && selectedIndex != 0, // فقط هم‌ردیفی‌ها
-          onTap: () => onSelected(0),
+          shouldShrink: selectedIndex != null && selectedIndex != 0,
+          buttonKey: GlobalKey(),
+          onSelected: () => onSelected(0),
         ),
-        SizedBox(width: Dimensions.horizontalMediumGap), // فاصله 16 بین دکمه‌ها
+        SizedBox(width: Dimensions.horizontalMediumGap),
         PracticeButton(
-          iconPath: icons[1],
+          iconPath: buttonsData[1].iconPath,
+          title: buttonsData[1].title,
+          practiceEntryPage: buttonsData[1].page,
           isSelected: selectedIndex == 1,
-          shouldShrink: selectedIndex != null && selectedIndex != 1, // فقط هم‌ردیفی‌ها
-          onTap: () => onSelected(1),
-        )
+          shouldShrink: selectedIndex != null && selectedIndex != 1,
+          buttonKey: GlobalKey(),
+          onSelected: () => onSelected(1),
+        ),
       ],
     );
   }

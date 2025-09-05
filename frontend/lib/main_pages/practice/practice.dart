@@ -3,6 +3,23 @@ import 'handle_button_selection.dart';
 import 'row_of_practice_buttons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'practice_button_data.dart';
+
+// practices entry pages
+import '../../practices/conversation/conversation_entry_page.dart';
+import '../../practices/grammar_learning/grammar_learning_entry_page.dart';
+import '../../practices/grammar_review/grammar_review_entry_page.dart';
+import '../../practices/listening/listening_entry_page.dart';
+import '../../practices/reading/reading_entry_page.dart';
+import '../../practices/vocab&grammar_review/vocab&grammar_review_entry_page.dart';
+import '../../practices/vocab_learning/vocab_learning_entry_page.dart';
+import '../../practices/vocab_review/vocab_review_entry_page.dart';
+import '../../practices/writing/writing_entry_page.dart';
+
+
+// text
+import '../../theme/text.dart';
+
 class PracticingPage extends StatefulWidget {
   const PracticingPage({super.key});
 
@@ -24,45 +41,86 @@ class _PracticingPageState extends State<PracticingPage>
           children: [
             Padding(
               padding: EdgeInsets.only(
-                top: 32.h,   
-                bottom: 98.h, 
+                top: 32.h,
+                bottom: 98.h,
               ),
               child: Column(
                 children: [
+                  /// 🔹 ردیف اول
                   PracticeRow(
                     key: rowKeys[0],
                     rowIndex: 0,
                     title: "Train Your Skills",
-                    icons: [
-                      "assets/practice_icons/Reading.svg",
-                      "assets/practice_icons/listening.svg",
-                      "assets/practice_icons/Writing.svg",
-                      "assets/practice_icons/Conversation.svg",
+                    buttonsData: [
+                      PracticeButtonData(
+                        iconPath: "assets/practice_icons/Reading.svg",
+                        title: TextVariables.readingMotivatingTitle,
+                        page: ReadingEntryPage(),
+                      ),
+                      PracticeButtonData(
+                        iconPath: "assets/practice_icons/Listening.svg",
+                        title: TextVariables.listeningMotivatingTitle,
+                        page: ListeningEntryPage(),
+                      ),
+                      PracticeButtonData(
+                        iconPath: "assets/practice_icons/Writing.svg",
+                        title: TextVariables.writingMotivatingTitle,
+                        page: WritingEntryPage(),
+                      ),
+                      PracticeButtonData(
+                        iconPath: "assets/practice_icons/Conversation.svg",
+                        title: TextVariables.conversationMotivatingTitle,
+                        page: ConversationEntryPage(),
+                      ),
                     ],
                     selectedIndex: selectedIndices[0],
                     hasAnySelected: selectedIndices.isNotEmpty,
                     onSelected: (i) => onButtonSelected(0, i),
                   ),
+
+                  /// 🔹 ردیف دوم
                   PracticeRow(
                     key: rowKeys[1],
                     rowIndex: 1,
                     title: "Unlock Knowledge",
-                    icons: [
-                      "assets/practice_icons/Vocabulary learning.svg",
-                      "assets/practice_icons/Grammar learning.svg",
+                    buttonsData: [
+                      PracticeButtonData(
+                        iconPath: "assets/practice_icons/Vocabulary learning.svg",
+                        title: TextVariables.vocabLearningMotivatingTitle,
+                        page: VocabLearningEntryPage(),
+                      ),
+                      PracticeButtonData(
+                        iconPath: "assets/practice_icons/Grammar learning.svg",
+                        title: TextVariables.grammarLearningMotivatingTitle,
+                        page: GrammarLearningEntryPage(),
+                      ),
                     ],
                     selectedIndex: selectedIndices[1],
                     hasAnySelected: selectedIndices.isNotEmpty,
                     onSelected: (i) => onButtonSelected(1, i),
                   ),
+
+                  /// 🔹 ردیف سوم
                   PracticeRow(
                     key: rowKeys[2],
                     rowIndex: 2,
                     title: "Recall Your Knowledge",
-                    icons: [
-                      "assets/practice_icons/Vocabulary review.svg",
-                      "assets/practice_icons/Grammar review.svg",
-                      "assets/practice_icons/Vocabulary&Grammar review.svg",
+                    buttonsData: [
+                      PracticeButtonData(
+                        iconPath: "assets/practice_icons/Vocabulary review.svg",
+                        title: TextVariables.vocabReviewMotivatingTitle,
+                        page: VocabReviewEntryPage(),
+                      ),
+                      PracticeButtonData(
+                        iconPath: "assets/practice_icons/Grammar review.svg",
+                        title: TextVariables.grammarReviewMotivatingTitle,
+                        page: GrammarReviewEntryPage(),
+                      ),
+                      PracticeButtonData(
+                        iconPath: "assets/practice_icons/Vocabulary&Grammar review.svg",
+                        title: TextVariables.vocabGrammarReviewMotivatingTitle,
+                        page: VocabGrammarReviewEntryPage(),
+                      ),
                     ],
                     selectedIndex: selectedIndices[2],
                     hasAnySelected: selectedIndices.isNotEmpty,
@@ -73,7 +131,6 @@ class _PracticingPageState extends State<PracticingPage>
             ),
           ],
         ),
-
       ),
     );
   }

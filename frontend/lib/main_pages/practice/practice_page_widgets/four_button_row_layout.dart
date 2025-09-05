@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../practice_button.dart';
+import '../practice_button_data.dart';
 
 // dimensions
 import '../../../theme/dimensions.dart';
@@ -8,14 +9,14 @@ import '../../../theme/dimensions.dart';
 
 
 class FourButtonRowLayout extends StatelessWidget {
-  final List<String> icons;
+  final List<PracticeButtonData> buttonsData; // به جای فقط آیکن
   final int? selectedIndex;
   final bool hasAnySelected;
   final Function(int) onSelected;
 
   const FourButtonRowLayout({
     super.key,
-    required this.icons,
+    required this.buttonsData,
     required this.selectedIndex,
     required this.hasAnySelected,
     required this.onSelected,
@@ -23,17 +24,20 @@ class FourButtonRowLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // دکمه‌ها
+    // ساخت دکمه‌ها
     List<Widget> buttons = List.generate(4, (i) {
       return PracticeButton(
-        iconPath: icons[i],
+        iconPath: buttonsData[i].iconPath,
+        title: buttonsData[i].title,
+        practiceEntryPage: buttonsData[i].page,
         isSelected: selectedIndex == i,
-        shouldShrink: selectedIndex != null && selectedIndex != i, // فقط هم‌ردیفی‌ها
-        onTap: () => onSelected(i),
+        shouldShrink: selectedIndex != null && selectedIndex != i,
+        buttonKey: GlobalKey(), // هر دکمه کلید جدا داشته باشه
+        onSelected: () => onSelected(i),
       );
     });
 
-    // ویجت برای ردیف دکمه‌ها با فاصله 16
+    // ویجت برای ردیف‌ها
     Row buildRow(List<Widget> rowButtons, MainAxisAlignment mainAxis, CrossAxisAlignment crossAxis) {
       List<Widget> spacedButtons = [];
       for (int i = 0; i < rowButtons.length; i++) {
@@ -61,19 +65,19 @@ class FourButtonRowLayout extends StatelessWidget {
     Widget bottomRow;
 
     switch (selectedIndex) {
-      case 0: // بالا چپ
+      case 0: 
         topRow = buildRow(buttons.sublist(0, 2), MainAxisAlignment.start, CrossAxisAlignment.center);
         bottomRow = buildRow(buttons.sublist(2), MainAxisAlignment.center, CrossAxisAlignment.start);
         break;
-      case 1: // بالا راست
+      case 1: 
         topRow = buildRow(buttons.sublist(0, 2), MainAxisAlignment.end, CrossAxisAlignment.center);
         bottomRow = buildRow(buttons.sublist(2), MainAxisAlignment.center, CrossAxisAlignment.start);
         break;
-      case 2: // پایین چپ
+      case 2: 
         topRow = buildRow(buttons.sublist(0, 2), MainAxisAlignment.center, CrossAxisAlignment.end);
         bottomRow = buildRow(buttons.sublist(2), MainAxisAlignment.start, CrossAxisAlignment.start);
         break;
-      case 3: // پایین راست
+      case 3: 
         topRow = buildRow(buttons.sublist(0, 2), MainAxisAlignment.center, CrossAxisAlignment.end);
         bottomRow = buildRow(buttons.sublist(2), MainAxisAlignment.end, CrossAxisAlignment.start);
         break;

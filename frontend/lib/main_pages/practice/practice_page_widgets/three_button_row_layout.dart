@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import '../practice_button.dart';
+import '../practice_button_data.dart';
 
 // dimensions
 import '../../../theme/dimensions.dart';
 
 class ThreeButtonRowLayout extends StatelessWidget {
-  final List<String> icons;
+  final List<PracticeButtonData> buttonsData;
   final int? selectedIndex;
   final bool hasAnySelected;
   final Function(int) onSelected;
 
   const ThreeButtonRowLayout({
     super.key,
-    required this.icons,
+    required this.buttonsData,
     required this.selectedIndex,
     required this.hasAnySelected,
     required this.onSelected,
@@ -20,18 +21,21 @@ class ThreeButtonRowLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // دکمه‌ها
+    // ساخت دکمه‌ها
     List<Widget> buttons = List.generate(3, (i) {
       return PracticeButton(
-        iconPath: icons[i],
+        iconPath: buttonsData[i].iconPath,
+        title: buttonsData[i].title,
+        practiceEntryPage: buttonsData[i].page,
         isSelected: selectedIndex == i,
-        shouldShrink: selectedIndex != null && selectedIndex != i, // فقط هم‌ردیفی‌ها
-        onTap: () => onSelected(i),
+        shouldShrink: selectedIndex != null && selectedIndex != i,
+        buttonKey: GlobalKey(),
+        onSelected: () => onSelected(i),
       );
     });
 
-    // تابع کمکی برای اضافه کردن فاصله بین دکمه‌ها
-    Row buildRow(List<Widget> rowButtons, MainAxisAlignment mainAxis, CrossAxisAlignment crossAxis) {
+    // تابع کمکی برای فاصله بین دکمه‌ها
+    Row buildRow(List<Widget> rowButtons) {
       List<Widget> spacedButtons = [];
       for (int i = 0; i < rowButtons.length; i++) {
         spacedButtons.add(rowButtons[i]);
@@ -40,16 +44,15 @@ class ThreeButtonRowLayout extends StatelessWidget {
         }
       }
       return Row(
-        mainAxisAlignment: mainAxis,
-        crossAxisAlignment: crossAxis,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: spacedButtons,
       );
     }
 
-    // ردیف بالا با دو دکمه و فاصله 16
-    Widget topRow = buildRow(buttons.sublist(0, 2), MainAxisAlignment.center, CrossAxisAlignment.center);
+    // ردیف بالا (۲ دکمه)
+    Widget topRow = buildRow(buttons.sublist(0, 2));
 
-    // دکمه پایین تکی
+    // دکمه پایین (۱ دکمه وسط)
     Widget bottomRow = Align(
       alignment: Alignment.topCenter,
       child: buttons[2],

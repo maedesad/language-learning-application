@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'practice_entry_popup.dart';
+
 
 // colors
 import '../../theme/colors/semantic_colors.dart';
@@ -8,16 +10,22 @@ import '../../theme/dimensions.dart';
 
 class PracticeButton extends StatelessWidget {
   final String iconPath;
+  final String title; // تایتل به عنوان ورودی
   final bool isSelected;
   final bool shouldShrink;
-  final VoidCallback onTap;
+  final GlobalKey buttonKey;
+  final Widget practiceEntryPage;
+  final VoidCallback onSelected;
 
   const PracticeButton({
     super.key,
     required this.iconPath,
+    required this.title,
     required this.isSelected,
     required this.shouldShrink,
-    required this.onTap,
+    required this.buttonKey,
+    required this.practiceEntryPage,
+    required this.onSelected,
   });
 
   @override
@@ -34,8 +42,19 @@ class PracticeButton extends StatelessWidget {
     Color bgColor = isSelected ? SemanticColors.grayButton : SemanticColors.surface;
 
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+         onSelected();
+        PracticePopup.showPopup(
+          context: context,
+          buttonKey: buttonKey,
+          title: title, // تایتل داینامیک
+          practiceEntryPage: practiceEntryPage, // پاس دادن صفحه ورودی
+          arrowPosition: PopupArrowPosition.left,
+          direction: PopupDirection.down,
+        );
+      },
       child: AnimatedContainer(
+        key: buttonKey,
         duration: const Duration(milliseconds: 300),
         width: size,
         height: size,
