@@ -12,6 +12,7 @@ class PracticePopup {
     bool isTwoButtonMode = true,
     PopupArrowPosition arrowPosition = PopupArrowPosition.center,
     PopupDirection direction = PopupDirection.down,
+    VoidCallback? onHide,
   }) {
     // بستن پاپ‌آپ قبلی اگه وجود داشته باشه
     hidePopup();
@@ -42,7 +43,10 @@ class PracticePopup {
             // کلیک روی فضای خالی → بستن پاپ‌آپ
             Positioned.fill(
               child: GestureDetector(
-                onTap: hidePopup,
+                onTap: () {
+                  hidePopup();
+                  if (onHide != null) onHide(); // 🔹 به parent خبر بده
+                },
                 child: Container(color: Colors.transparent),
               ),
             ),

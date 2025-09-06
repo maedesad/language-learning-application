@@ -20,6 +20,7 @@ class PracticeRow extends StatelessWidget {
   final int? selectedIndex;
   final bool hasAnySelected;
   final Function(int) onSelected;
+  final VoidCallback onUnselect;
 
   const PracticeRow({
     super.key,
@@ -29,6 +30,7 @@ class PracticeRow extends StatelessWidget {
     required this.selectedIndex,
     required this.hasAnySelected,
     required this.onSelected,
+    required this.onUnselect,
   });
 
   @override
@@ -41,6 +43,7 @@ class PracticeRow extends StatelessWidget {
         selectedIndex: selectedIndex,
         hasAnySelected: hasAnySelected,
         onSelected: onSelected,
+        onUnselect:onUnselect
       );
     } else if (buttonsData.length == 3) {
       buttonsWidget = ThreeButtonRowLayout(
@@ -48,6 +51,7 @@ class PracticeRow extends StatelessWidget {
         selectedIndex: selectedIndex,
         hasAnySelected: hasAnySelected,
         onSelected: onSelected,
+        onUnselect:onUnselect
       );
     } else {
       buttonsWidget = FourButtonRowLayout(
@@ -55,6 +59,7 @@ class PracticeRow extends StatelessWidget {
         selectedIndex: selectedIndex,
         hasAnySelected: hasAnySelected,
         onSelected: onSelected,
+        onUnselect:onUnselect
       );
     }
 

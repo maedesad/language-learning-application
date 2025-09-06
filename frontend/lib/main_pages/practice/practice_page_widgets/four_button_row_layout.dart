@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../practice_button.dart';
 import '../practice_button_data.dart';
+import '../Handle_button_selection.dart';
 
 // dimensions
 import '../../../theme/dimensions.dart';
@@ -13,6 +14,7 @@ class FourButtonRowLayout extends StatelessWidget {
   final int? selectedIndex;
   final bool hasAnySelected;
   final Function(int) onSelected;
+  final VoidCallback onUnselect;
 
   const FourButtonRowLayout({
     super.key,
@@ -20,6 +22,7 @@ class FourButtonRowLayout extends StatelessWidget {
     required this.selectedIndex,
     required this.hasAnySelected,
     required this.onSelected,
+    required this.onUnselect,
   });
 
   @override
@@ -34,6 +37,7 @@ class FourButtonRowLayout extends StatelessWidget {
         shouldShrink: selectedIndex != null && selectedIndex != i,
         buttonKey: GlobalKey(), // هر دکمه کلید جدا داشته باشه
         onSelected: () => onSelected(i),
+        onUnselect: onUnselect,
       );
     });
 

@@ -16,6 +16,7 @@ class PracticeButton extends StatelessWidget {
   final GlobalKey buttonKey;
   final Widget practiceEntryPage;
   final VoidCallback onSelected;
+  final VoidCallback? onUnselect;
 
   const PracticeButton({
     super.key,
@@ -26,6 +27,7 @@ class PracticeButton extends StatelessWidget {
     required this.buttonKey,
     required this.practiceEntryPage,
     required this.onSelected,
+    required this.onUnselect,
   });
 
   @override
@@ -43,14 +45,19 @@ class PracticeButton extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-         onSelected();
+        onSelected();
         PracticePopup.showPopup(
           context: context,
           buttonKey: buttonKey,
-          title: title, // تایتل داینامیک
-          practiceEntryPage: practiceEntryPage, // پاس دادن صفحه ورودی
+          title: title,
+          practiceEntryPage: practiceEntryPage,
           arrowPosition: PopupArrowPosition.left,
           direction: PopupDirection.down,
+          onHide: () {
+            if (onUnselect != null) {
+              onUnselect!(); // 🔹 وقتی popup بسته شد
+            }
+          },
         );
       },
       child: AnimatedContainer(

@@ -11,6 +11,7 @@ class TwoButtonRowLayout extends StatelessWidget {
   final int? selectedIndex;
   final bool hasAnySelected;
   final Function(int) onSelected;
+  final VoidCallback onUnselect;
 
   const TwoButtonRowLayout({
     super.key,
@@ -18,6 +19,7 @@ class TwoButtonRowLayout extends StatelessWidget {
     required this.selectedIndex,
     required this.hasAnySelected,
     required this.onSelected,
+    required this.onUnselect,
   });
 
   @override
@@ -33,6 +35,7 @@ class TwoButtonRowLayout extends StatelessWidget {
           shouldShrink: selectedIndex != null && selectedIndex != 0,
           buttonKey: GlobalKey(),
           onSelected: () => onSelected(0),
+          onUnselect: onUnselect,
         ),
         SizedBox(width: Dimensions.horizontalMediumGap),
         PracticeButton(
@@ -43,6 +46,7 @@ class TwoButtonRowLayout extends StatelessWidget {
           shouldShrink: selectedIndex != null && selectedIndex != 1,
           buttonKey: GlobalKey(),
           onSelected: () => onSelected(1),
+          onUnselect: onUnselect,
         ),
       ],
     );

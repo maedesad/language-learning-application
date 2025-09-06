@@ -76,6 +76,7 @@ class _PracticingPageState extends State<PracticingPage>
                     selectedIndex: selectedIndices[0],
                     hasAnySelected: selectedIndices.isNotEmpty,
                     onSelected: (i) => onButtonSelected(0, i),
+                    onUnselect: clearSelection,
                   ),
 
                   /// 🔹 ردیف دوم
@@ -98,6 +99,7 @@ class _PracticingPageState extends State<PracticingPage>
                     selectedIndex: selectedIndices[1],
                     hasAnySelected: selectedIndices.isNotEmpty,
                     onSelected: (i) => onButtonSelected(1, i),
+                    onUnselect: clearSelection,
                   ),
 
                   /// 🔹 ردیف سوم
@@ -125,6 +127,7 @@ class _PracticingPageState extends State<PracticingPage>
                     selectedIndex: selectedIndices[2],
                     hasAnySelected: selectedIndices.isNotEmpty,
                     onSelected: (i) => onButtonSelected(2, i),
+                    onUnselect: clearSelection,
                   ),
                 ],
               ),

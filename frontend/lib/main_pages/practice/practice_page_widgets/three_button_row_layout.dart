@@ -10,6 +10,7 @@ class ThreeButtonRowLayout extends StatelessWidget {
   final int? selectedIndex;
   final bool hasAnySelected;
   final Function(int) onSelected;
+  final VoidCallback onUnselect;
 
   const ThreeButtonRowLayout({
     super.key,
@@ -17,6 +18,7 @@ class ThreeButtonRowLayout extends StatelessWidget {
     required this.selectedIndex,
     required this.hasAnySelected,
     required this.onSelected,
+    required this.onUnselect,
   });
 
   @override
@@ -31,6 +33,7 @@ class ThreeButtonRowLayout extends StatelessWidget {
         shouldShrink: selectedIndex != null && selectedIndex != i,
         buttonKey: GlobalKey(),
         onSelected: () => onSelected(i),
+        onUnselect: onUnselect,
       );
     });
 

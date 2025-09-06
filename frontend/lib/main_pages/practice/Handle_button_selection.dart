@@ -17,7 +17,7 @@ mixin HandleButtonSelection<T extends StatefulWidget> on State<T> {
   // پاک کردن انتخاب‌ها
   void clearSelection() {
     setState(() {
-      selectedIndices.clear();
+      selectedIndices.clear();      
     });
   }
 
