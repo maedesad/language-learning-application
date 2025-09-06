@@ -40,17 +40,7 @@ class PracticePopup {
 
         return Stack(
           children: [
-            // کلیک روی فضای خالی → بستن پاپ‌آپ
-            Positioned.fill(
-              child: GestureDetector(
-                onTap: () {
-                  hidePopup();
-                  if (onHide != null) onHide(); // 🔹 به parent خبر بده
-                },
-                child: Container(color: Colors.transparent),
-              ),
-            ),
-
+            
             // خود پاپ‌آپ
             Positioned(
               top: top,

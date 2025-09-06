@@ -52,12 +52,7 @@ class PracticeButton extends StatelessWidget {
           title: title,
           practiceEntryPage: practiceEntryPage,
           arrowPosition: PopupArrowPosition.left,
-          direction: PopupDirection.down,
-          onHide: () {
-            if (onUnselect != null) {
-              onUnselect!(); // 🔹 وقتی popup بسته شد
-            }
-          },
+          direction: PopupDirection.down,          
         );
       },
       child: AnimatedContainer(

@@ -4,6 +4,7 @@ import 'row_of_practice_buttons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'practice_button_data.dart';
+import 'practice_entry_popup.dart';
 
 // practices entry pages
 import '../../practices/conversation/conversation_entry_page.dart';
@@ -32,8 +33,12 @@ class _PracticingPageState extends State<PracticingPage>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: clearSelection,
       behavior: HitTestBehavior.translucent,
+      onTapDown: (_) {
+        // با اولین لمس، پاپ‌آپ رو ببند و انتخاب رو پاک کن
+        PracticePopup.hidePopup();
+        clearSelection();
+      },
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: ListView(
