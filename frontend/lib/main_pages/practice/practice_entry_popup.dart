@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class PracticePopup {
   static OverlayEntry? _currentPopup;
+  static bool get isVisible => _currentPopup != null;
 
   static void showPopup({
     required BuildContext context,
