@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class PracticePopup {
   static OverlayEntry? _currentPopup;
 
@@ -21,18 +20,17 @@ class PracticePopup {
     final Offset buttonPosition = buttonBox.localToGlobal(Offset.zero);
     final Size buttonSize = buttonBox.size;
 
-    const double popupWidth = 200;
-    const double popupHeight = 140;
-    const double arrowSize = 12;
+    const double popupWidth = 312;
+    const double popupHeight = 201;
+    const double arrowSize = 20;
 
-    double left;
-    if (arrowPosition == PopupArrowPosition.left) {
-      left = buttonPosition.dx;
-    } else if (arrowPosition == PopupArrowPosition.right) {
-      left = buttonPosition.dx + buttonSize.width - popupWidth;
-    } else {
-      left = buttonPosition.dx + buttonSize.width / 2 - popupWidth / 2;
-    }
+    // مرکز صفحه برای الاین افقی پاپ‌آپ
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double popupLeft = (screenWidth - popupWidth) / 2;
+
+    // موقعیت نوک فلش نسبت به پاپ‌آپ
+    double arrowLeft = buttonPosition.dx + buttonSize.width / 2 - popupLeft - arrowSize / 2;
+    arrowLeft = arrowLeft.clamp(16.0, popupWidth - arrowSize - 16.0);
 
     double top = direction == PopupDirection.down
         ? buttonPosition.dy + buttonSize.height + arrowSize
@@ -44,8 +42,9 @@ class PracticePopup {
           children: [
             Positioned(
               top: top,
-              left: left,
+              left: popupLeft,
               width: popupWidth,
+              height: popupHeight,
               child: Material(
                 color: Colors.transparent,
                 child: _PopupContent(
@@ -54,6 +53,7 @@ class PracticePopup {
                   direction: direction,
                   isTwoButtonMode: isTwoButtonMode,
                   arrowSize: arrowSize,
+                  arrowLeft: arrowLeft,
                   onPurpleButtonTap: () {
                     hidePopup();
                     Navigator.push(
@@ -61,6 +61,7 @@ class PracticePopup {
                       MaterialPageRoute(builder: (_) => practiceEntryPage),
                     );
                   },
+                  onHide: onHide,
                 ),
               ),
             ),
@@ -88,6 +89,8 @@ class _PopupContent extends StatelessWidget {
   final PopupArrowPosition arrowPosition;
   final PopupDirection direction;
   final double arrowSize;
+  final double arrowLeft;
+  final VoidCallback? onHide;
 
   const _PopupContent({
     required this.title,
@@ -96,6 +99,8 @@ class _PopupContent extends StatelessWidget {
     required this.arrowPosition,
     required this.direction,
     required this.arrowSize,
+    required this.arrowLeft,
+    this.onHide,
   });
 
   @override
@@ -105,6 +110,8 @@ class _PopupContent extends StatelessWidget {
       children: [
         // مستطیل اصلی پاپ‌آپ
         Container(
+          width: double.infinity,
+          height: double.infinity,
           decoration: BoxDecoration(
             color: Colors.grey[800],
             borderRadius: BorderRadius.circular(12),
@@ -142,7 +149,7 @@ class _PopupContent extends StatelessWidget {
         Positioned(
           top: direction == PopupDirection.down ? -arrowSize : null,
           bottom: direction == PopupDirection.up ? -arrowSize : null,
-          left: _calculateArrowLeft(),
+          left: arrowLeft,
           child: CustomPaint(
             size: Size(arrowSize, arrowSize),
             painter: _ArrowPainter(direction, Colors.grey[800]!),
@@ -150,18 +157,6 @@ class _PopupContent extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  double _calculateArrowLeft() {
-    switch (arrowPosition) {
-      case PopupArrowPosition.left:
-        return 16;
-      case PopupArrowPosition.right:
-        return 200 - arrowSize - 16;
-      case PopupArrowPosition.center:
-      default:
-        return 200 / 2 - arrowSize / 2;
-    }
   }
 }
 
@@ -176,12 +171,10 @@ class _ArrowPainter extends CustomPainter {
     final paint = Paint()..color = color;
     final path = Path();
     if (direction == PopupDirection.down) {
-      // مثلث به سمت بالا
       path.moveTo(0, size.height);
       path.lineTo(size.width / 2, 0);
       path.lineTo(size.width, size.height);
     } else {
-      // مثلث به سمت پایین
       path.moveTo(0, 0);
       path.lineTo(size.width / 2, size.height);
       path.lineTo(size.width, 0);
