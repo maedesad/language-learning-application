@@ -22,19 +22,20 @@ class PracticePopup {
 
     const double popupWidth = 312;
     const double popupHeight = 201;
-    const double arrowSize = 20;
+    const double arrowWidth = 34;
+    const double arrowHeight = 15;
 
     // مرکز صفحه برای الاین افقی پاپ‌آپ
     final double screenWidth = MediaQuery.of(context).size.width;
     final double popupLeft = (screenWidth - popupWidth) / 2;
 
     // موقعیت نوک فلش نسبت به پاپ‌آپ
-    double arrowLeft = buttonPosition.dx + buttonSize.width / 2 - popupLeft - arrowSize / 2;
-    arrowLeft = arrowLeft.clamp(16.0, popupWidth - arrowSize - 16.0);
+    double arrowLeft = buttonPosition.dx + buttonSize.width / 2 - popupLeft - arrowWidth / 2;
+    arrowLeft = arrowLeft.clamp(16.0, popupWidth - arrowWidth - 16.0);
 
     double top = direction == PopupDirection.down
-        ? buttonPosition.dy + buttonSize.height + arrowSize
-        : buttonPosition.dy - popupHeight - arrowSize;
+        ? buttonPosition.dy + buttonSize.height + arrowWidth
+        : buttonPosition.dy - popupHeight - arrowWidth;
 
     _currentPopup = OverlayEntry(
       builder: (context) {
@@ -52,7 +53,8 @@ class PracticePopup {
                   arrowPosition: arrowPosition,
                   direction: direction,
                   isTwoButtonMode: isTwoButtonMode,
-                  arrowSize: arrowSize,
+                  arrowWidth: arrowWidth,
+                  arrowHeight: arrowHeight,
                   arrowLeft: arrowLeft,
                   onPurpleButtonTap: () {
                     hidePopup();
@@ -88,7 +90,8 @@ class _PopupContent extends StatelessWidget {
   final bool isTwoButtonMode;
   final PopupArrowPosition arrowPosition;
   final PopupDirection direction;
-  final double arrowSize;
+  final double arrowWidth;   // عرض دلخواه مثلث
+  final double arrowHeight;
   final double arrowLeft;
   final VoidCallback? onHide;
 
@@ -98,7 +101,8 @@ class _PopupContent extends StatelessWidget {
     required this.isTwoButtonMode,
     required this.arrowPosition,
     required this.direction,
-    required this.arrowSize,
+    required this.arrowWidth,
+    required this.arrowHeight,
     required this.arrowLeft,
     this.onHide,
   });
@@ -147,11 +151,11 @@ class _PopupContent extends StatelessWidget {
 
         // فلش
         Positioned(
-          top: direction == PopupDirection.down ? -arrowSize : null,
-          bottom: direction == PopupDirection.up ? -arrowSize : null,
+          top: direction == PopupDirection.down ? -arrowHeight : null,
+          bottom: direction == PopupDirection.up ? -arrowHeight : null,
           left: arrowLeft,
           child: CustomPaint(
-            size: Size(arrowSize, arrowSize),
+            size: Size(arrowWidth, arrowHeight),
             painter: _ArrowPainter(direction, Colors.grey[800]!),
           ),
         ),
@@ -163,22 +167,28 @@ class _PopupContent extends StatelessWidget {
 class _ArrowPainter extends CustomPainter {
   final PopupDirection direction;
   final Color color;
+  final double arrowWidth;   // عرض دلخواه مثلث
+  final double arrowHeight;  // ارتفاع دلخواه مثلث
 
-  _ArrowPainter(this.direction, this.color);
+  _ArrowPainter(this.direction, this.color, {this.arrowWidth = 34, this.arrowHeight = 15});
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()..color = color;
     final path = Path();
+
     if (direction == PopupDirection.down) {
-      path.moveTo(0, size.height);
-      path.lineTo(size.width / 2, 0);
-      path.lineTo(size.width, size.height);
+      // مثلث به سمت بالا
+      path.moveTo(0, arrowHeight);
+      path.lineTo(arrowWidth / 2, 0);
+      path.lineTo(arrowWidth, arrowHeight);
     } else {
+      // مثلث به سمت پایین
       path.moveTo(0, 0);
-      path.lineTo(size.width / 2, size.height);
-      path.lineTo(size.width, 0);
+      path.lineTo(arrowWidth / 2, arrowHeight);
+      path.lineTo(arrowWidth, 0);
     }
+
     path.close();
     canvas.drawPath(path, paint);
   }
@@ -186,3 +196,6 @@ class _ArrowPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
+
+
+
