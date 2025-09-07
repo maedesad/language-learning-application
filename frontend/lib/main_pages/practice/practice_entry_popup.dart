@@ -141,54 +141,57 @@ class _PopupContent extends StatelessWidget {
             horizontal: Dimensions.Paddingsize1,
             vertical: Dimensions.Paddingsize2,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Title always aligned left
-              Text(
-                title,
-                style: TextStyles.ButtonTextLight,
-              ),
-              SizedBox(height: Dimensions.verticalLargeGap),
+          child: SingleChildScrollView(
+            physics: const NeverScrollableScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Title always aligned left
+                Text(
+                  title,
+                  style: TextStyles.ButtonTextLight,
+                ),
+                SizedBox(height: Dimensions.verticalLargeGap),
 
-              if (isTwoButtonMode) ...[
-                Center( // 🔹 دکمه در مرکز
+                if (isTwoButtonMode) ...[
+                  Center( // 🔹 دکمه در مرکز
+                    child: ElevatedButton(
+                      onPressed: onPurpleButtonTap,  /// change it later
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: SemanticColors.blueButton,
+                        minimumSize: Size(248.w, Dimensions.buttonHeight),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(Dimensions.smallRadius),
+                        ),
+                      ),
+                      child: Text(
+                        TextVariables.StartPlannedQuest,
+                        style: TextStyles.ButtonTextDark,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: Dimensions.verticalSmallGap),
+                ],
+
+                Center( // 🔹 دکمه دوم هم در مرکز
                   child: ElevatedButton(
-                    onPressed: onPurpleButtonTap,  /// change it later
+                    onPressed: onPurpleButtonTap,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: SemanticColors.blueButton,
+                      backgroundColor: SemanticColors.purpleButton,
                       minimumSize: Size(248.w, Dimensions.buttonHeight),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(Dimensions.smallRadius),
                       ),
                     ),
                     child: Text(
-                      TextVariables.StartPlannedQuest,
+                      TextVariables.StartNewQuest,
                       style: TextStyles.ButtonTextDark,
                     ),
                   ),
                 ),
-                SizedBox(height: Dimensions.verticalSmallGap),
               ],
-
-              Center( // 🔹 دکمه دوم هم در مرکز
-                child: ElevatedButton(
-                  onPressed: onPurpleButtonTap,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: SemanticColors.purpleButton,
-                    minimumSize: Size(248.w, Dimensions.buttonHeight),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(Dimensions.smallRadius),
-                    ),
-                  ),
-                  child: Text(
-                    TextVariables.StartNewQuest,
-                    style: TextStyles.ButtonTextDark,
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
 
         ),
