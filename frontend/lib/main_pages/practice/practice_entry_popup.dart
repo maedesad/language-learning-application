@@ -12,9 +12,9 @@ import '../../theme/text.dart';
 import '../../theme/text_style/text_style.dart';
 
 class PracticePopup {
-  static OverlayEntry? _currentPopup;
+  static OverlayEntry? _currentPopup;  
   static bool get isVisible => _currentPopup != null;
-
+  
   static void showPopup({
     required BuildContext context,
     required GlobalKey buttonKey,

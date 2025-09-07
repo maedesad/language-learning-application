@@ -41,13 +41,16 @@ mixin HandleButtonSelection<T extends StatefulWidget> on State<T> {
       await Future<void>.delayed(const Duration(milliseconds: 50));
       await WidgetsBinding.instance.endOfFrame;
       if (!mounted) return;
+      final PopupDirection popupDirection = (rowIndex == 2 && buttonIndex == 2)
+          ? PopupDirection.up
+          : PopupDirection.down;
       PracticePopup.showPopup(
         context: context,
         buttonKey: buttonKey,
         title: title,
         practiceEntryPage: practiceEntryPage,
         arrowPosition: PopupArrowPosition.left,
-        direction: PopupDirection.down,
+        direction: popupDirection,
       );
     }
   }
