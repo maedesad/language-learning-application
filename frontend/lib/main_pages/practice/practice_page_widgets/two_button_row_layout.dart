@@ -10,8 +10,9 @@ class TwoButtonRowLayout extends StatelessWidget {
   final List<PracticeButtonData> buttonsData;
   final int? selectedIndex;
   final bool hasAnySelected;
-  final Function(int) onSelected;
+  final Function(int, GlobalKey, String, Widget) onSelected;
   final VoidCallback onUnselect;
+  final List<GlobalKey> buttonKeys;
 
   const TwoButtonRowLayout({
     super.key,
@@ -20,6 +21,7 @@ class TwoButtonRowLayout extends StatelessWidget {
     required this.hasAnySelected,
     required this.onSelected,
     required this.onUnselect,
+    required this.buttonKeys,
   });
 
   @override
@@ -33,20 +35,20 @@ class TwoButtonRowLayout extends StatelessWidget {
           practiceEntryPage: buttonsData[0].page,
           isSelected: selectedIndex == 0,
           shouldShrink: selectedIndex != null && selectedIndex != 0,
-          buttonKey: GlobalKey(),
-          onSelected: () => onSelected(0),
+          buttonKey: buttonKeys[0],
+          onSelected: () => onSelected(0, buttonKeys[0], buttonsData[0].title, buttonsData[0].page),
           onUnselect: onUnselect,
         ),
         SizedBox(width: Dimensions.horizontalMediumGap),
         PracticeButton(
-          iconPath: buttonsData[1].iconPath,
-          title: buttonsData[1].title,
-          practiceEntryPage: buttonsData[1].page,
-          isSelected: selectedIndex == 1,
-          shouldShrink: selectedIndex != null && selectedIndex != 1,
-          buttonKey: GlobalKey(),
-          onSelected: () => onSelected(1),
-          onUnselect: onUnselect,
+            iconPath: buttonsData[1].iconPath,
+            title: buttonsData[1].title,
+            practiceEntryPage: buttonsData[1].page,
+            isSelected: selectedIndex == 1,
+            shouldShrink: selectedIndex != null && selectedIndex != 1,
+            buttonKey: buttonKeys[1],
+            onSelected: () => onSelected(1, buttonKeys[1], buttonsData[1].title, buttonsData[1].page),
+            onUnselect: onUnselect,
         ),
       ],
     );

@@ -16,8 +16,13 @@ class PracticePopup {
   }) {
     hidePopup();
 
+    final BuildContext? targetContext = buttonKey.currentContext;
+    if (targetContext == null) {
+      // اگر به هر دلیل هنوز ویجت رندر نشده، از نمایش پاپ‌آپ صرف نظر کن
+      return;
+    }
     final RenderBox buttonBox =
-        buttonKey.currentContext!.findRenderObject() as RenderBox;
+        targetContext.findRenderObject() as RenderBox;
     final Offset buttonPosition = buttonBox.localToGlobal(Offset.zero);
     final Size buttonSize = buttonBox.size;
 

@@ -13,8 +13,9 @@ class FourButtonRowLayout extends StatelessWidget {
   final List<PracticeButtonData> buttonsData; // به جای فقط آیکن
   final int? selectedIndex;
   final bool hasAnySelected;
-  final Function(int) onSelected;
+  final Function(int, GlobalKey, String, Widget) onSelected;
   final VoidCallback onUnselect;
+  final List<GlobalKey> buttonKeys;
 
   const FourButtonRowLayout({
     super.key,
@@ -23,6 +24,7 @@ class FourButtonRowLayout extends StatelessWidget {
     required this.hasAnySelected,
     required this.onSelected,
     required this.onUnselect,
+    required this.buttonKeys,
   });
 
   @override
@@ -30,15 +32,15 @@ class FourButtonRowLayout extends StatelessWidget {
     // ساخت دکمه‌ها
     List<Widget> buttons = List.generate(4, (i) {
       return PracticeButton(
-        iconPath: buttonsData[i].iconPath,
-        title: buttonsData[i].title,
-        practiceEntryPage: buttonsData[i].page,
-        isSelected: selectedIndex == i,
-        shouldShrink: selectedIndex != null && selectedIndex != i,
-        buttonKey: GlobalKey(), // هر دکمه کلید جدا داشته باشه
-        onSelected: () => onSelected(i),
-        onUnselect: onUnselect,
-      );
+          iconPath: buttonsData[i].iconPath,
+          title: buttonsData[i].title,
+          practiceEntryPage: buttonsData[i].page,
+          isSelected: selectedIndex == i,
+          shouldShrink: selectedIndex != null && selectedIndex != i,
+          buttonKey: buttonKeys[i], // هر دکمه کلید جدا داشته باشه
+          onSelected: () => onSelected(i, buttonKeys[i], buttonsData[i].title, buttonsData[i].page),
+          onUnselect: onUnselect,
+        );
     });
 
     // ویجت برای ردیف‌ها

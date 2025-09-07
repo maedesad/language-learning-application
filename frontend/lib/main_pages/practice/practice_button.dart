@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'practice_entry_popup.dart';
 
 
 // colors
@@ -46,14 +45,6 @@ class PracticeButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         onSelected();
-        PracticePopup.showPopup(
-          context: context,
-          buttonKey: buttonKey,
-          title: title,
-          practiceEntryPage: practiceEntryPage,
-          arrowPosition: PopupArrowPosition.left,
-          direction: PopupDirection.down,          
-        );
       },
       child: AnimatedContainer(
         key: buttonKey,

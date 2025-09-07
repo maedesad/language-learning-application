@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'practice_entry_popup.dart';
 
 mixin HandleButtonSelection<T extends StatefulWidget> on State<T> {
   // انتخاب‌ها
@@ -22,7 +23,7 @@ mixin HandleButtonSelection<T extends StatefulWidget> on State<T> {
   }
 
   // هندل انتخاب دکمه
-  void onButtonSelected(int rowIndex, int buttonIndex) {
+  Future<void> onButtonSelected(int rowIndex, int buttonIndex, GlobalKey buttonKey, String title, Widget practiceEntryPage) async {
     setState(() {
       selectedIndices.clear();
       selectedIndices[rowIndex] = buttonIndex;
@@ -30,10 +31,23 @@ mixin HandleButtonSelection<T extends StatefulWidget> on State<T> {
 
     final keyContext = rowKeys[rowIndex]?.currentContext;
     if (keyContext != null) {
-      Scrollable.ensureVisible(
+      await Scrollable.ensureVisible(
         keyContext,
         duration: const Duration(milliseconds: 500),
         alignment: 0.5,
+      );
+      if (!mounted) return;
+      // صبر برای اتمام انیمیشن دکمه (AnimatedContainer ~300ms) و فریم پایانی
+      await Future<void>.delayed(const Duration(milliseconds: 200));
+      await WidgetsBinding.instance.endOfFrame;
+      if (!mounted) return;
+      PracticePopup.showPopup(
+        context: context,
+        buttonKey: buttonKey,
+        title: title,
+        practiceEntryPage: practiceEntryPage,
+        arrowPosition: PopupArrowPosition.left,
+        direction: PopupDirection.down,
       );
     }
   }

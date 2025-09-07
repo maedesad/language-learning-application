@@ -101,7 +101,7 @@ class _PracticingPageState extends State<PracticingPage>
                       ],
                       selectedIndex: selectedIndices[0],
                       hasAnySelected: selectedIndices.isNotEmpty,
-                      onSelected: (i) => onButtonSelected(0, i),
+                      onSelected: (i, key, title, page) => onButtonSelected(0, i, key, title, page),
                       onUnselect: clearSelection,
                     ),
 
@@ -124,7 +124,7 @@ class _PracticingPageState extends State<PracticingPage>
                       ],
                       selectedIndex: selectedIndices[1],
                       hasAnySelected: selectedIndices.isNotEmpty,
-                      onSelected: (i) => onButtonSelected(1, i),
+                      onSelected: (i, key, title, page) => onButtonSelected(1, i, key, title, page),
                       onUnselect: clearSelection,
                     ),
 
@@ -152,7 +152,7 @@ class _PracticingPageState extends State<PracticingPage>
                       ],
                       selectedIndex: selectedIndices[2],
                       hasAnySelected: selectedIndices.isNotEmpty,
-                      onSelected: (i) => onButtonSelected(2, i),
+                      onSelected: (i, key, title, page) => onButtonSelected(2, i, key, title, page),
                       onUnselect: clearSelection,
                     ),
                   ],

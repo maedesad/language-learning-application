@@ -13,13 +13,13 @@ import '../../theme/text_style/text_style.dart';
 
 
 
-class PracticeRow extends StatelessWidget {
+class PracticeRow extends StatefulWidget {
   final int rowIndex;
   final String title;
   final List<PracticeButtonData> buttonsData;
   final int? selectedIndex;
   final bool hasAnySelected;
-  final Function(int) onSelected;
+  final Function(int, GlobalKey, String, Widget) onSelected;
   final VoidCallback onUnselect;
 
   const PracticeRow({
@@ -34,39 +34,54 @@ class PracticeRow extends StatelessWidget {
   });
 
   @override
+  State<PracticeRow> createState() => _PracticeRowState();
+}
+
+class _PracticeRowState extends State<PracticeRow> {
+  late final List<GlobalKey> buttonKeys;
+
+  @override
+  void initState() {
+    super.initState();
+    buttonKeys = List<GlobalKey>.generate(widget.buttonsData.length, (_) => GlobalKey());
+  }
+
+  @override
   Widget build(BuildContext context) {
     Widget buttonsWidget;
 
-    if (buttonsData.length == 2) {
+    if (widget.buttonsData.length == 2) {
       buttonsWidget = TwoButtonRowLayout(
-        buttonsData: buttonsData,
-        selectedIndex: selectedIndex,
-        hasAnySelected: hasAnySelected,
-        onSelected: onSelected,
-        onUnselect:onUnselect
+        buttonsData: widget.buttonsData,
+        selectedIndex: widget.selectedIndex,
+        hasAnySelected: widget.hasAnySelected,
+        buttonKeys: buttonKeys,
+        onSelected: widget.onSelected,
+        onUnselect: widget.onUnselect,
       );
-    } else if (buttonsData.length == 3) {
+    } else if (widget.buttonsData.length == 3) {
       buttonsWidget = ThreeButtonRowLayout(
-        buttonsData: buttonsData,
-        selectedIndex: selectedIndex,
-        hasAnySelected: hasAnySelected,
-        onSelected: onSelected,
-        onUnselect:onUnselect
+        buttonsData: widget.buttonsData,
+        selectedIndex: widget.selectedIndex,
+        hasAnySelected: widget.hasAnySelected,
+        buttonKeys: buttonKeys,
+        onSelected: widget.onSelected,
+        onUnselect: widget.onUnselect,
       );
     } else {
       buttonsWidget = FourButtonRowLayout(
-        buttonsData: buttonsData,
-        selectedIndex: selectedIndex,
-        hasAnySelected: hasAnySelected,
-        onSelected: onSelected,
-        onUnselect:onUnselect
+        buttonsData: widget.buttonsData,
+        selectedIndex: widget.selectedIndex,
+        hasAnySelected: widget.hasAnySelected,
+        buttonKeys: buttonKeys,
+        onSelected: widget.onSelected,
+        onUnselect: widget.onUnselect,
       );
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // عنوان ردیف
         Container(
           height: 77.h,
           padding: EdgeInsets.symmetric(
@@ -74,12 +89,11 @@ class PracticeRow extends StatelessWidget {
           ),
           alignment: Alignment.centerLeft,
           child: Text(
-            title,
+            widget.title,
             style: TextStyles.h2_mainTitle,
           ),
         ),
 
-        // دکمه‌های ردیف
         Padding(
           padding: EdgeInsets.only(
             left: Dimensions.screenHorizontalLargePadding,

@@ -9,8 +9,9 @@ class ThreeButtonRowLayout extends StatelessWidget {
   final List<PracticeButtonData> buttonsData;
   final int? selectedIndex;
   final bool hasAnySelected;
-  final Function(int) onSelected;
+  final Function(int, GlobalKey, String, Widget) onSelected;
   final VoidCallback onUnselect;
+  final List<GlobalKey> buttonKeys;
 
   const ThreeButtonRowLayout({
     super.key,
@@ -19,6 +20,7 @@ class ThreeButtonRowLayout extends StatelessWidget {
     required this.hasAnySelected,
     required this.onSelected,
     required this.onUnselect,
+    required this.buttonKeys,
   });
 
   @override
@@ -26,15 +28,15 @@ class ThreeButtonRowLayout extends StatelessWidget {
     // ساخت دکمه‌ها
     List<Widget> buttons = List.generate(3, (i) {
       return PracticeButton(
-        iconPath: buttonsData[i].iconPath,
-        title: buttonsData[i].title,
-        practiceEntryPage: buttonsData[i].page,
-        isSelected: selectedIndex == i,
-        shouldShrink: selectedIndex != null && selectedIndex != i,
-        buttonKey: GlobalKey(),
-        onSelected: () => onSelected(i),
-        onUnselect: onUnselect,
-      );
+          iconPath: buttonsData[i].iconPath,
+          title: buttonsData[i].title,
+          practiceEntryPage: buttonsData[i].page,
+          isSelected: selectedIndex == i,
+          shouldShrink: selectedIndex != null && selectedIndex != i,
+          buttonKey: buttonKeys[i],
+          onSelected: () => onSelected(i, buttonKeys[i], buttonsData[i].title, buttonsData[i].page),
+          onUnselect: onUnselect,
+        );
     });
 
     // تابع کمکی برای فاصله بین دکمه‌ها
