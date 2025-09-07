@@ -38,7 +38,7 @@ mixin HandleButtonSelection<T extends StatefulWidget> on State<T> {
       );
       if (!mounted) return;
       // صبر برای اتمام انیمیشن دکمه (AnimatedContainer ~300ms) و فریم پایانی
-      await Future<void>.delayed(const Duration(milliseconds: 200));
+      await Future<void>.delayed(const Duration(milliseconds: 50));
       await WidgetsBinding.instance.endOfFrame;
       if (!mounted) return;
       PracticePopup.showPopup(

@@ -10,4 +10,8 @@ class TextVariables {
     static const String vocabReviewMotivatingTitle = "Practice Your Words";
     static const String grammarReviewMotivatingTitle = "Practice Grammar";
     static const String vocabGrammarReviewMotivatingTitle = "Practice Vocab & Grammar";
+
+  // practice popup buttons text
+    static const String StartPlannedQuest = "Start Planned Quest";
+    static const String StartNewQuest = "Start New Quest";
 } 

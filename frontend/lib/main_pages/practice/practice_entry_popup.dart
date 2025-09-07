@@ -1,4 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+
+// colors
+import '../../theme/colors/semantic_colors.dart';
+// dimensions
+import '../../theme/dimensions.dart';
+// text
+import '../../theme/text.dart';
+// text style
+import '../../theme/text_style/text_style.dart';
 
 class PracticePopup {
   static OverlayEntry? _currentPopup;
@@ -26,10 +37,10 @@ class PracticePopup {
     final Offset buttonPosition = buttonBox.localToGlobal(Offset.zero);
     final Size buttonSize = buttonBox.size;
 
-    const double popupWidth = 312;
-    const double popupHeight = 201;
-    const double arrowWidth = 34;
-    const double arrowHeight = 15;
+    double popupWidth = Dimensions.popupWidth;
+    double popupHeight = Dimensions.popupHeight;
+    double arrowWidth = 34.w;
+    double arrowHeight = 15.h;
 
     // مرکز صفحه برای الاین افقی پاپ‌آپ
     final double screenWidth = MediaQuery.of(context).size.width;
@@ -123,36 +134,63 @@ class _PopupContent extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
-            color: Colors.grey[800],
-            borderRadius: BorderRadius.circular(12),
+            color: SemanticColors.grayButton,
+            borderRadius: BorderRadius.circular(Dimensions.largeRadius),
           ),
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.symmetric(
+            horizontal: Dimensions.Paddingsize1,
+            vertical: Dimensions.Paddingsize2,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(title,
-                  style: const TextStyle(color: Colors.white, fontSize: 16)),
-              const SizedBox(height: 12),
+              // Title always aligned left
+              Text(
+                title,
+                style: TextStyles.ButtonTextLight,
+              ),
+              SizedBox(height: Dimensions.verticalLargeGap),
+
               if (isTwoButtonMode) ...[
-                ElevatedButton(
-                  onPressed: null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue[200],
+                Center( // 🔹 دکمه در مرکز
+                  child: ElevatedButton(
+                    onPressed: onPurpleButtonTap,  /// change it later
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: SemanticColors.blueButton,
+                      minimumSize: Size(248.w, Dimensions.buttonHeight),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(Dimensions.smallRadius),
+                      ),
+                    ),
+                    child: Text(
+                      TextVariables.StartPlannedQuest,
+                      style: TextStyles.ButtonTextDark,
+                    ),
                   ),
-                  child: const Text("Start Planned Quest"),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: Dimensions.verticalSmallGap),
               ],
-              ElevatedButton(
-                onPressed: onPurpleButtonTap,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple[200],
+
+              Center( // 🔹 دکمه دوم هم در مرکز
+                child: ElevatedButton(
+                  onPressed: onPurpleButtonTap,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: SemanticColors.purpleButton,
+                    minimumSize: Size(248.w, Dimensions.buttonHeight),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(Dimensions.smallRadius),
+                    ),
+                  ),
+                  child: Text(
+                    TextVariables.StartNewQuest,
+                    style: TextStyles.ButtonTextDark,
+                  ),
                 ),
-                child: const Text("Start New Quest"),
               ),
             ],
           ),
+
         ),
 
         // فلش
@@ -162,7 +200,7 @@ class _PopupContent extends StatelessWidget {
           left: arrowLeft,
           child: CustomPaint(
             size: Size(arrowWidth, arrowHeight),
-            painter: _ArrowPainter(direction, Colors.grey[800]!),
+            painter: _ArrowPainter(direction, SemanticColors.grayButton),
           ),
         ),
       ],
