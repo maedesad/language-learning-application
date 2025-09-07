@@ -41,6 +41,7 @@ class PracticePopup {
     double popupHeight = Dimensions.popupHeight;
     double arrowWidth = 34.w;
     double arrowHeight = 15.h;
+    double gapFromButton = 8.h; // فاصله ثابت نوک فلش تا دکمه
 
     // مرکز صفحه برای الاین افقی پاپ‌آپ
     final double screenWidth = MediaQuery.of(context).size.width;
@@ -51,8 +52,8 @@ class PracticePopup {
     arrowLeft = arrowLeft.clamp(16.0, popupWidth - arrowWidth - 16.0);
 
     double top = direction == PopupDirection.down
-        ? buttonPosition.dy + buttonSize.height + arrowWidth
-        : buttonPosition.dy - popupHeight - arrowWidth;
+        ? buttonPosition.dy + buttonSize.height + gapFromButton + arrowHeight
+        : buttonPosition.dy - popupHeight - gapFromButton - arrowHeight;
 
     _currentPopup = OverlayEntry(
       builder: (context) {
